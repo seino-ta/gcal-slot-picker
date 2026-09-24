@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "カレンダー日程ピッカー",
+  "version": "1.0.0",
+  "description": "Googleカレンダー上でドラッグ選択した時間帯を、メールに貼れる日程候補テキストに変換してコピーできます",
+  "permissions": ["clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": ["https://calendar.google.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

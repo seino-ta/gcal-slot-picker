@@ -1,0 +1,219 @@
+/* カレンダー日程ピッカー */
+
+.gcsp-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483000;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.gcsp-fab:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.gcsp-fab.gcsp-on {
+  background: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.3), 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.gcsp-overlay {
+  position: fixed;
+  z-index: 2147482000;
+  cursor: crosshair;
+  user-select: none;
+  overflow: hidden;
+  background: rgba(26, 115, 232, 0.04);
+}
+
+.gcsp-slot {
+  position: absolute;
+  border-radius: 6px;
+  background: rgba(26, 115, 232, 0.35);
+  border: 1.5px solid #1a73e8;
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: none;
+}
+.gcsp-slot span {
+  font: 500 11px/1.4 Roboto, "Noto Sans JP", sans-serif;
+  color: #fff;
+  background: rgba(26, 115, 232, 0.9);
+  border-radius: 4px;
+  padding: 0 4px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  white-space: nowrap;
+}
+.gcsp-slot.gcsp-temp {
+  background: rgba(26, 115, 232, 0.2);
+  border-style: dashed;
+}
+
+.gcsp-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 90px;
+  z-index: 2147483001;
+  width: 300px;
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #202124;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  font: 13px/1.5 Roboto, "Noto Sans JP", sans-serif;
+  padding: 14px;
+  gap: 10px;
+}
+.gcsp-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gcsp-panel-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.gcsp-count {
+  color: #1a73e8;
+  font-weight: 600;
+}
+.gcsp-close {
+  margin-left: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #5f6368;
+  padding: 4px;
+  border-radius: 4px;
+}
+.gcsp-close:hover {
+  background: #f1f3f4;
+}
+.gcsp-hint {
+  color: #5f6368;
+  font-size: 12px;
+}
+.gcsp-list {
+  overflow-y: auto;
+  max-height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gcsp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+.gcsp-row:hover {
+  background: #f1f3f4;
+}
+.gcsp-row button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #5f6368;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.gcsp-row button:hover {
+  color: #d93025;
+}
+.gcsp-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: #5f6368;
+  font-size: 12px;
+}
+.gcsp-controls label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.gcsp-controls select {
+  font: inherit;
+  color: #202124;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+  padding: 2px 4px;
+  background: #fff;
+  max-width: 150px;
+}
+.gcsp-out {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 8px;
+  font: 12px/1.6 Roboto, "Noto Sans JP", monospace;
+  color: #202124;
+  background: #f8f9fa;
+}
+.gcsp-actions {
+  display: flex;
+  gap: 8px;
+}
+.gcsp-actions button {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 0;
+  font: 600 13px Roboto, "Noto Sans JP", sans-serif;
+  cursor: pointer;
+}
+.gcsp-copy {
+  background: #1a73e8;
+  color: #fff;
+}
+.gcsp-copy:hover {
+  background: #1765cc;
+}
+.gcsp-clear {
+  background: #f1f3f4;
+  color: #202124;
+}
+.gcsp-clear:hover {
+  background: #e8eaed;
+}
+
+.gcsp-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%, 10px);
+  z-index: 2147483002;
+  background: #202124;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font: 13px Roboto, "Noto Sans JP", sans-serif;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+.gcsp-toast.gcsp-show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
